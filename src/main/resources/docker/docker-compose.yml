@@ -1,0 +1,30 @@
+version: "3.5"
+services:
+  assignment-db:
+    image: mongo:3.6.17
+    container_name: assignment-db
+    env_file: docker-compose.env
+    ports:
+      - "27017:27017"
+    networks:
+      - services
+    expose:
+      - "8300-8302"
+      - "8300-8302/udp"
+      - "8600"
+      - "8600/udp"
+    volumes:
+      - type: volume
+        source: mongo-main
+        target: "/mongo/data"
+
+
+networks:
+  services:
+    external:
+      name: services
+
+
+volumes:
+  mongo-main:
+
